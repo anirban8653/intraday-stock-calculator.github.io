@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .result-table {
+            margin-top: 20px;
+        }
+        .result-table td, .result-table th {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stock Market Calculator</h1>
+    <form id="stockForm">
+        <label for="current_price">Current Market Price of the Stock:</label><br>
+        <input type="number" id="current_price" name="current_price" required><br><br>
+        
+        <label for="future_price">Predicted Market Price of the Stock:</label><br>
+        <input type="number" id="future_price" name="future_price" required><br><br>
+        
+        <label for="total_share">Quantity:</label><br>
+        <input type="number" id="total_share" name="total_share" required><br><br>
+        
+        <input type="button" value="Calculate" onclick="calculateStock()">
+    </form>
+
+    <div id="result" class="result-table"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
