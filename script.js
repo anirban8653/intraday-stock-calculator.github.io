@@ -30,10 +30,22 @@ function calculateStock() {
 
     let net_pl = change - total_charge;
 
-    let gross_label = future_price > current_price ? "Gross Gain" : "Gross Loss";
-    let net_label = future_price > current_price ? "Net Gain" : "Net Loss";
+    // Determine labels and colors based on future and current price comparison
+    let gross_label, net_label, gross_color, net_color;
 
-    // Generate the result table
+    if (future_price > current_price) {
+        gross_label = "Gross Gain";
+        net_label = "Net Gain";
+        gross_color = "green";
+        net_color = "green";
+    } else {
+        gross_label = "Gross Loss";
+        net_label = "Net Loss";
+        gross_color = "red";
+        net_color = "red";
+    }
+
+    // Generate the result table with conditional coloring
     let result_table = `
         <table>
             <tr><th>Label</th><th>Amount</th><th>P/L</th><th>Margin (X)</th><th>Charge Type</th><th>Amount</th></tr>
@@ -41,8 +53,8 @@ function calculateStock() {
             <tr><td>Broker Price</td><td>${broker_price.toFixed(2)}</td><td></td><td>${margin}</td><td>STT</td><td>${stt.toFixed(2)}</td></tr>
             <tr><td>Current Total price</td><td>${total_price_c.toFixed(2)}</td><td></td><td></td><td>ETC</td><td>${etc.toFixed(2)}</td></tr>
             <tr><td>Future Total price</td><td>${total_price_f.toFixed(2)}</td><td></td><td></td><td>SEBI</td><td>${sebi.toFixed(2)}</td></tr>
-            <tr><td>${gross_label}</td><td>${change.toFixed(2)}</td><td>${change_p.toFixed(2)}%</td><td></td><td>SD</td><td>${sd.toFixed(2)}</td></tr>
-            <tr><td>${net_label}</td><td>${net_pl.toFixed(2)}</td><td>${(net_pl * 100 / my_price).toFixed(2)}%</td><td></td><td>IPFT</td><td>${ipft.toFixed(2)}</td></tr>
+            <tr><td>${gross_label}</td><td style="color:${gross_color};">${change.toFixed(2)}</td><td style="color:${gross_color};">${change_p.toFixed(2)}%</td><td></td><td>SD</td><td>${sd.toFixed(2)}</td></tr>
+            <tr><td>${net_label}</td><td style="color:${net_color};">${net_pl.toFixed(2)}</td><td style="color:${net_color};">${(net_pl * 100 / my_price).toFixed(2)}%</td><td></td><td>IPFT</td><td>${ipft.toFixed(2)}</td></tr>
             <tr><td>Stop Loss</td><td>${(current_price * (1 - stop_loss_per)).toFixed(2)}</td><td>${(stop_loss_per * 100).toFixed(2)}%</td><td></td><td>GST</td><td>${gst.toFixed(2)}</td></tr>
             <tr><td>End Wallet</td><td>${(net_price - total_charge).toFixed(2)}</td><td></td><td></td><td>Total Charges</td><td>${total_charge.toFixed(2)}</td></tr>
         </table>
